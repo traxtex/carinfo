@@ -1,0 +1,17 @@
+[{
+  "name": "ZiS",
+  "country": "Russia",
+  "country_code": "RU",
+  "country_logo_url": "https://s.car.info/g/flags/svg/mini/ru.svg",
+  "brand_logo_url": "https://s.car.info/image_files/logos/90/1236.jpg"
+},
+{
+  "name": "Cybertruck",
+  "url": "https://www.car.info/en-se/tesla/cybertruck",
+  "year": "2024 - 2025",
+  "engine_types": "Electric",
+  "seats": "5",
+  "chassis": "SUV",
+  "img_id": "1374610"
+}
+]
