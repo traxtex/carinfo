@@ -34,6 +34,11 @@ def extract_series_info(item, category):
         series_info['engine_types'] = None
 
     series_info['category'] = category
+
+    if not series_info.get('name').isascii():
+        parts = series_info.get('url').split("/")
+        series_info['name'] = parts[-1].capitalize()
+
     print(series_info)
     return series_info
 
@@ -65,8 +70,8 @@ def main():
         brands = json.load(file)
 
     for i, brand in enumerate(brands, 1):
-        print(f"Fetching series for brand {i}/{len(brands)}: {brand['Name']}")
-        series_url = brand['URL']
+        print(f"Fetching series for brand {i}/{len(brands)}: {brand['name']}")
+        series_url = brand['url']
         brand['series'] = fetch_series(series_url)
         time.sleep(1)
 

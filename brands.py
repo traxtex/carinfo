@@ -23,23 +23,26 @@ def fetch_brands(page):
         for item in brand_items:
             # Extract brand information
             brand = dict()
-            brand['Name'] = item.select_one('.brand_name').text.strip()
-            brand['URL'] = item.select_one('.brand_name')['href']
-            brand['Country'] = item.select_one('.tooltip_topleft img')['alt']
-            brand['CountryCode'] = item.select_one('.tooltip_topleft')['data-country']
-            brand['CountryLogoURL'] = item.select_one('.tooltip_topleft img')['src']
+            brand['name'] = item.select_one('.brand_name').text.strip()
+            brand['url'] = item.select_one('.brand_name')['href']
+            brand['country'] = item.select_one('.tooltip_topleft img')['alt']
+            brand['country_code'] = item.select_one('.tooltip_topleft')['data-country']
+            brand['country_logo_url'] = item.select_one('.tooltip_topleft img')['src']
 
             # Check if brand logo image exists before accessing its attributes
             brand_logo_image = item.select_one('.brand_logo_image')
             if brand_logo_image:
-                brand['BrandLogoURL'] = brand_logo_image['style'].replace("background-image: url('", "").replace("');",
+                brand['brand_logo_url'] = brand_logo_image['style'].replace("background-image: url('", "").replace("');",
                                                                                                                  "")
             else:
-                brand['BrandLogoURL'] = None
+                brand['brand_logo_url'] = None
 
-            brand['Year'] = item.select_one('.brand_year').text.strip()  # Extract brand year
+            brand['year'] = item.select_one('.brand_year').text.strip()  # Extract brand year
 
-            # Append the brand data to the list
+            if not brand.get('name').isascii():
+                parts = brand.get('url').split("/")
+                brand['name'] = parts[-1].capitalize()
+
             brands.append(brand)
 
         return brands
