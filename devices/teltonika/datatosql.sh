@@ -80,7 +80,7 @@ jq -c '.[]' $JSON_FILE | while read -r record; do
     new_photo_link="$BASE_URL/$file_name"
 
     # Generate SQL INSERT statement
-    sql_statement="INSERT INTO device_models (name, manufacturer, model, description, documentation_link, photo_link, protocol, tags, device_type) VALUES ('$device_name', '$manufacturer', '$model', '$description', '$documentation_link', '$new_photo_link', '$protocol', '$tags', $device_type);"
+    sql_statement="INSERT INTO device_models (name, manufacturer, description, documentation_link, photo_link, protocol, tags, device_type) VALUES ('$device_name', '$manufacturer', '$description', '$documentation_link', '$new_photo_link', '$protocol', '$tags', $device_type);"
     echo $sql_statement >> $OUTPUT_SQL_FILE
     log "Generated SQL statement for: $device_name"
 done
